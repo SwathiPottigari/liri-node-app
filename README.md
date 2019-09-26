@@ -23,7 +23,7 @@
 * Use the command __node liri.js do-what-it-says__
 
 ### DEMO
-![alt text]("Logo Title Text 1")
+![alt text](https://github.com/SwathiPottigari/liri-node-app/blob/master/images/demo.gif "Demo")
 
 
 
