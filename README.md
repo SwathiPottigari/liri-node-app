@@ -22,5 +22,8 @@
 #### To pass the commands from the file:
 * Use the command __node liri.js do-what-it-says__
 
+### DEMO
+![alt text]("Logo Title Text 1")
+
 
 
