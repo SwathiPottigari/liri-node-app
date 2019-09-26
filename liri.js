@@ -5,7 +5,7 @@ var spotify = new Spotify(keys.spotify);
 var axios = require("axios");
 var moment = require('moment');
 var fs = require("fs");
-var title="";
+var title = "";
 
 
 var command = process.argv[2];
@@ -37,13 +37,13 @@ function callBandsintownAPI(artist) {
     var artistUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
     axios.get(artistUrl).then(function (res) {
         var response = res.data;
-        title="\nThe List of the events for Artist\n";
-         var data = "";
+        title = "\nThe List of the events for Artist\n";
+        var data = "";
         response.forEach(function (element) {
-             data += element.venue.name + " at " + element.venue.city + "," + element.venue.region + " " + element.venue.country + " on " + moment(element.datetime).format("MM/DD/YYYY") +' \n';             
-            });
-            console.log(title+"\n"+data);
-        logDataInFile(title+"\n"+data);
+            data += element.venue.name + " at " + element.venue.city + "," + element.venue.region + " " + element.venue.country + " on " + moment(element.datetime).format("MM/DD/YYYY") + ' \n';
+        });
+        console.log(title + "\n" + data);
+        logDataInFile(title + "\n" + data);
     });
 };
 
@@ -55,24 +55,26 @@ function callSpotifyAPI(query) {
             return console.log(err);
         }
         var response = res.tracks.items;
-        title="The List of Songs";
-        var data="";
+        title = "The List of Songs";
+        var data = "";
         response.forEach(function (element) {
-            data +=" "+"\nArtists - " + element.album.artists[0].name+"\nSong - " + element.name+"\nPreview - " + element.preview_url+"\nAlbum - " + element.album.name+" \n---------------------------------------\n";
+            data += " " + "\nArtists - " + element.album.artists[0].name + "\nSong - " + element.name + "\nPreview - " + element.preview_url + "\nAlbum - " + element.album.name + " \n---------------------------------------\n";
         });
-        console.log(title+"\n"+data);
-        logDataInFile(title+"\n"+data);
+        console.log(title + "\n" + data);
+        logDataInFile(title + "\n" + data);
 
     });
 };
 
 function callOMDBapi(title) {
-
+    if (title === "") {
+        title = "Mr.Nobody";
+    }
     axios.get("http://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy").then(function (response) {
-        title="The movie details are below";
-        var data="\nTitle - " + response.data.Title+"\nYear - " + response.data.Year+"\nIMDB Rating - " + response.data.Ratings[0].Value+"\nRotten Tomatoes Rating - " + response.data.Ratings[1].Value+"\nCountry - " + response.data.Country+"\nLanguage - " + response.data.Language+"\nPlot - " + response.data.Plot+"\nActors - " + response.data.Actors+" \n-------------------------------\n";
-        console.log(title+"\n"+data);
-        logDataInFile(title+"\n"+data);
+        title = "The movie details are below";
+        var data = "\nTitle - " + response.data.Title + "\nYear - " + response.data.Year + "\nIMDB Rating - " + response.data.Ratings[0].Value + "\nRotten Tomatoes Rating - " + response.data.Ratings[1].Value + "\nCountry - " + response.data.Country + "\nLanguage - " + response.data.Language + "\nPlot - " + response.data.Plot + "\nActors - " + response.data.Actors + " \n-------------------------------\n";
+        console.log(title + "\n" + data);
+        logDataInFile(title + "\n" + data);
     }).catch(function (error) {
         console.log(error);
     });
