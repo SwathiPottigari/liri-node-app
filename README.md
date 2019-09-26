@@ -25,5 +25,3 @@
 ### DEMO
 ![alt text](https://github.com/SwathiPottigari/liri-node-app/blob/master/images/demo.gif "Demo")
 
-
-
